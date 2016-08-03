@@ -2270,11 +2270,6 @@ static void qpnp_timed_enable_worker(struct work_struct *work)
 	time_ms = hap->td_time_ms;
 	spin_unlock(&hap->td_lock);
 
-	if (time_ms < 0)
-		return;
-
-	mutex_lock(&hap->lock);
-
 	if (time_ms == 0) {
 		/* disable haptics */
 		hrtimer_cancel(&hap->hap_timer);
