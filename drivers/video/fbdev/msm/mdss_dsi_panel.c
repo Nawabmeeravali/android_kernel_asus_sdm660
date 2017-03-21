@@ -2706,7 +2706,7 @@ static int mdss_panel_parse_display_timings(struct device_node *np,
 					panel_data, true);
 			rc = mdss_dsi_panel_timing_switch(ctrl, &pt->timing);
 		} else {
- 			kfree(pt);
+			kfree(pt);
 		}
 		return rc;
 	}
