@@ -2054,9 +2054,6 @@ struct request_queue *blk_mq_init_allocated_queue(struct blk_mq_tag_set *set,
 
 	blk_mq_init_cpu_queues(q, set->nr_hw_queues);
 
-	if (blk_mq_init_hw_queues(q, set))
-		goto err_hctxs;
-
 	get_online_cpus();
 	mutex_lock(&all_q_mutex);
 
