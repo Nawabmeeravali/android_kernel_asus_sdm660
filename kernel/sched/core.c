@@ -645,8 +645,8 @@ void resched_curr(struct rq *rq)
 
 	if (set_nr_and_not_polling(curr))
 		smp_send_reschedule(cpu);
-	else
-		trace_sched_wake_idle_without_ipi(cpu);
+	//else
+		//trace_sched_wake_idle_without_ipi(cpu);
 }
 
 void resched_cpu(int cpu)
@@ -716,8 +716,8 @@ static void wake_up_idle_cpu(int cpu)
 
 	if (set_nr_and_not_polling(rq->idle))
 		smp_send_reschedule(cpu);
-	else
-		trace_sched_wake_idle_without_ipi(cpu);
+	//else
+		//trace_sched_wake_idle_without_ipi(cpu);
 }
 
 static bool wake_up_full_nohz_cpu(int cpu)
@@ -890,7 +890,7 @@ static inline void enqueue_task(struct rq *rq, struct task_struct *p, int flags)
 	if (!(flags & ENQUEUE_RESTORE))
 		sched_info_queued(rq, p);
 	p->sched_class->enqueue_task(rq, p, flags);
-	trace_sched_enq_deq_task(p, 1, cpumask_bits(&p->cpus_allowed)[0]);
+	//trace_sched_enq_deq_task(p, 1, cpumask_bits(&p->cpus_allowed)[0]);
 }
 
 static inline void dequeue_task(struct rq *rq, struct task_struct *p, int flags)
@@ -1405,7 +1405,7 @@ void set_task_cpu(struct task_struct *p, unsigned int new_cpu)
 #endif
 #endif
 
-	trace_sched_migrate_task(p, new_cpu, pct_task_load(p));
+	//trace_sched_migrate_task(p, new_cpu, pct_task_load(p));
 
 	if (task_cpu(p) != new_cpu) {
 		if (p->sched_class->migrate_task_rq)
@@ -1520,7 +1520,7 @@ int migrate_swap(struct task_struct *cur, struct task_struct *p)
 	if (!cpumask_test_cpu(arg.src_cpu, tsk_cpus_allowed(arg.dst_task)))
 		goto out;
 
-	trace_sched_swap_numa(cur, arg.src_cpu, p, arg.dst_cpu);
+	//trace_sched_swap_numa(cur, arg.src_cpu, p, arg.dst_cpu);
 	ret = stop_two_cpus(arg.dst_cpu, arg.src_cpu, migrate_swap_stop, &arg);
 
 out:
@@ -1582,7 +1582,7 @@ unsigned long wait_task_inactive(struct task_struct *p, long match_state)
 		 * just go back and repeat.
 		 */
 		rq = task_rq_lock(p, &flags);
-		trace_sched_wait_task(p);
+		//trace_sched_wait_task(p);
 		running = task_running(rq, p);
 		queued = task_on_rq_queued(p);
 		ncsw = 0;
@@ -1859,7 +1859,7 @@ ttwu_do_wakeup(struct rq *rq, struct task_struct *p, int wake_flags)
 	check_preempt_curr(rq, p, wake_flags);
 
 	p->state = TASK_RUNNING;
-	trace_sched_wakeup(p);
+	//trace_sched_wakeup(p);
 
 #ifdef CONFIG_SMP
 	if (p->sched_class->task_woken) {
@@ -2003,8 +2003,8 @@ static void ttwu_queue_remote(struct task_struct *p, int cpu)
 	if (llist_add(&p->wake_entry, &cpu_rq(cpu)->wake_list)) {
 		if (!set_nr_if_polling(rq->idle))
 			smp_send_reschedule(cpu);
-		else
-			trace_sched_wake_idle_without_ipi(cpu);
+		//else
+			//trace_sched_wake_idle_without_ipi(cpu);
 	}
 }
 
@@ -2101,7 +2101,7 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 	if (!(p->state & state))
 		goto out;
 
-	trace_sched_waking(p);
+	//trace_sched_waking(p);
 
 	success = 1; /* we're going to change ->state */
 
@@ -2259,7 +2259,7 @@ static void try_to_wake_up_local(struct task_struct *p)
 	if (!(p->state & TASK_NORMAL))
 		goto out;
 
-	trace_sched_waking(p);
+	//trace_sched_waking(p);
 
 	if (!task_on_rq_queued(p)) {
 		u64 wallclock = sched_ktime_clock();
@@ -2689,7 +2689,7 @@ void wake_up_new_task(struct task_struct *p)
 	post_init_entity_util_avg(&p->se);
 	activate_task(rq, p, ENQUEUE_WAKEUP_NEW);
 	p->on_rq = TASK_ON_RQ_QUEUED;
-	trace_sched_wakeup_new(p);
+	//trace_sched_wakeup_new(p);
 	check_preempt_curr(rq, p, WF_FORK);
 #ifdef CONFIG_SMP
 	if (p->sched_class->task_woken) {
@@ -3402,7 +3402,7 @@ void preempt_count_add(int val)
 #ifdef CONFIG_DEBUG_PREEMPT
 		current->preempt_disable_ip = ip;
 #endif
-		trace_preempt_off(CALLER_ADDR0, ip);
+		//trace_preempt_off(CALLER_ADDR0, ip);
 	}
 }
 EXPORT_SYMBOL(preempt_count_add);
@@ -3425,7 +3425,7 @@ void preempt_count_sub(int val)
 #endif
 
 	if (preempt_count() == val)
-		trace_preempt_on(CALLER_ADDR0, get_parent_ip(CALLER_ADDR1));
+		//trace_preempt_on(CALLER_ADDR0, get_parent_ip(CALLER_ADDR1));
 	__preempt_count_sub(val);
 }
 EXPORT_SYMBOL(preempt_count_sub);
@@ -3652,7 +3652,7 @@ static void __sched notrace __schedule(bool preempt)
 
 		set_task_last_switch_out(prev, wallclock);
 
-		trace_sched_switch(preempt, prev, next);
+		//trace_sched_switch(preempt, prev, next);
 		rq = context_switch(rq, prev, next); /* unlocks the rq */
 		cpu = cpu_of(rq);
 	} else {
@@ -3867,7 +3867,7 @@ void rt_mutex_setprio(struct task_struct *p, int prio)
 		goto out_unlock;
 	}
 
-	trace_sched_pi_setprio(p, prio);
+	//trace_sched_pi_setprio(p, prio);
 	oldprio = p->prio;
 
 	if (oldprio == prio)
@@ -5639,7 +5639,7 @@ int migrate_task_to(struct task_struct *p, int target_cpu)
 
 	/* TODO: This is not properly updating schedstats */
 
-	trace_sched_move_numa(p, curr_cpu, target_cpu);
+	//trace_sched_move_numa(p, curr_cpu, target_cpu);
 	return stop_one_cpu(curr_cpu, migration_cpu_stop, &arg);
 }
 
@@ -5979,12 +5979,12 @@ int sched_isolate_cpu(int cpu)
 	int ret_code = 0;
 	u64 start_time = 0;
 
-	if (trace_sched_isolate_enabled())
-		start_time = sched_clock();
+	//if (trace_sched_isolate_enabled())
+	//	start_time = sched_clock();
 
-	cpu_maps_update_begin();
+	//cpu_maps_update_begin();
 
-	cpumask_andnot(&avail_cpus, cpu_online_mask, cpu_isolated_mask);
+	//cpumask_andnot(&avail_cpus, cpu_online_mask, cpu_isolated_mask);
 
 	/* We cannot isolate ALL cpus in the system */
 	if (cpumask_weight(&avail_cpus) == 1) {
@@ -6031,8 +6031,8 @@ int sched_isolate_cpu(int cpu)
 
 out:
 	cpu_maps_update_done();
-	trace_sched_isolate(cpu, cpumask_bits(cpu_isolated_mask)[0],
-			    start_time, 1);
+	//trace_sched_isolate(cpu, cpumask_bits(cpu_isolated_mask)[0],
+	//		    start_time, 1);
 	return ret_code;
 }
 
@@ -6048,8 +6048,8 @@ int sched_unisolate_cpu_unlocked(int cpu)
 	struct rq *rq = cpu_rq(cpu);
 	u64 start_time = 0;
 
-	if (trace_sched_isolate_enabled())
-		start_time = sched_clock();
+	//if (trace_sched_isolate_enabled())
+	//	start_time = sched_clock();
 
 	if (!cpu_isolation_vote[cpu]) {
 		ret_code = -EINVAL;
@@ -6080,8 +6080,8 @@ int sched_unisolate_cpu_unlocked(int cpu)
 	}
 
 out:
-	trace_sched_isolate(cpu, cpumask_bits(cpu_isolated_mask)[0],
-			    start_time, 0);
+	//trace_sched_isolate(cpu, cpumask_bits(cpu_isolated_mask)[0],
+	//		    start_time, 0);
 	return ret_code;
 }
 
