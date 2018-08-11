@@ -792,6 +792,6 @@ CONFIG_IOSCHED_SWITCHER=y
 CONFIG_QNS_SYSTEM=y
 
 
-
+CONFIG_DTS_EAGLE=y
 
 # Huaqin add for ZQL1650-358 by liunianliang at 2018/02/08 end
