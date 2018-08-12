@@ -842,7 +842,7 @@
 		qcom,sensor-id = <1>;
 		qcom,poll-ms = <100>;
 		qcom,therm-reset-temp = <115>;
-		qcom,core-limit-temp = <70>;
+		qcom,core-limit-temp = <82>;
 		qcom,core-temp-hysteresis = <10>;
 		qcom,hotplug-temp = <105>;
 		qcom,hotplug-temp-hysteresis = <20>;
@@ -911,6 +911,8 @@
 		reg = <0x780000 0x1000>;
 		qcom,low-hyst-temp = <100>;
 		qcom,high-hyst-temp = <100>;
+		qcom,high-hyst-temp = <100>;
+		qcom,polling-interval = <100>;
 
 		ea0: ea0 {
 			sensor = <&sensor_information1>;
