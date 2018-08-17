@@ -72,13 +72,6 @@ TEXT_OFFSET := 0x00080000
 endif
 
 ifeq ($(cc-name),clang)
-KBUILD_CFLAGS	+= -mllvm -polly \
-					-mllvm -polly-run-dce \
-					-mllvm -polly-run-inliner \
-					-mllvm -polly-opt-fusion=max \
-					-mllvm -polly-ast-use-context \
-					-mllvm -polly-vectorizer=stripmine \
-					-mllvm -polly-detect-keep-going
 
 KBUILD_CFLAGS += $(call cc-disable-warning, asm-operand-widths)
 endif
