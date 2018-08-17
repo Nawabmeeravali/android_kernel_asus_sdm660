@@ -556,7 +556,7 @@
 				#address-cells = <1>;
 				#size-cells = <0>;
 
-				qcom,speed-bin = <90>;
+				qcom,speed-bin = <123>;
 
 				qcom,initial-pwrlevel = <5>;
 
