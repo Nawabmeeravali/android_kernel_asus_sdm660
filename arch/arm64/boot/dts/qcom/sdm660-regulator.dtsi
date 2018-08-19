@@ -395,8 +395,8 @@
 			regulator-min-microvolt = <2700000>;
 			regulator-max-microvolt = <3125000>;
 		/* Huaqin add for change LDO by xuefeng at 2018/01/31 start */
-			parent-supply = <&pm660_l10>;
-			//qcom,init-voltage = <3125000>;
+			//parent-supply = <&pm660_l10>;
+			qcom,init-voltage = <3125000>;
 			regulator-always-on;
 		/* Huaqin add for change LDO by xuefeng at 2018/01/31 end */
 			status = "okay";
