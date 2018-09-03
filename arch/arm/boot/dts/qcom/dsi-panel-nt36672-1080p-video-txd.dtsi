@@ -248,7 +248,10 @@
 		qcom,mdss-dsi-panel-status-check-mode = "reg_read";
 		qcom,mdss-dsi-panel-status-read-length = <1>;
 		qcom,mdss-dsi-panel-status-value = <0x9C>;
+		qcom,mdss-dsi-min-refresh-rate = <14>;
 		qcom,mdss-dsi-panel-max-error-count = <3>;
+                qcom,mdss-dsi-pan-enable-dynamic-fps;
+		qcom,mdss-dsi-pan-fps-update = "dfps_immediate_porch_mode_vfp";
 		/* Huaqin add for ESD check by xieguoqiang 20170203 end */
 	};
 };
