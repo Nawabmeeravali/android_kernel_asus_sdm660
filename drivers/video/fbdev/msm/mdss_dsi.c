@@ -1859,6 +1859,7 @@ static irqreturn_t test_hw_vsync_handler(int irq, void *data)
 	if (pdata->next)
 		complete_all(&pdata->next->te_done);
 	return IRQ_HANDLED;
+}
 
 int mdss_dsi_cont_splash_on(struct mdss_panel_data *pdata)
 {
