@@ -563,7 +563,7 @@ static int smblib_set_adapter_allowance(struct smb_charger *chg,
 	return rc;
 }
 
-#define MICRO_5V	5000000
+#define MICRO_5V	3000000
 #define MICRO_9V	9000000
 #define MICRO_12V	12000000
 static int smblib_set_usb_pd_allowed_voltage(struct smb_charger *chg,
