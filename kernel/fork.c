@@ -95,7 +95,7 @@
 /*
  * Minimum number of threads to boot the kernel
  */
-#define MIN_THREADS 25
+#define MIN_THREADS 18
 
 /*
  * Maximum number of threads
