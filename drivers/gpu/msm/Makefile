@@ -1,4 +1,4 @@
-ccflags-y := -Idrivers/staging/android
+ccflags-y := -Iinclude/uapi/drm -Iinclude/drm -Idrivers/gpu/msm -Idrivers/staging/android -Ofast -fforce-addr -finline-functions -ffast-math -funsafe-math-optimizations
 ccflags-y += $(call cc-option,-funroll-loops,)
 
 msm_kgsl_core-y = \
