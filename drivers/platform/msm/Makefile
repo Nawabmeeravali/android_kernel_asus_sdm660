@@ -1,6 +1,8 @@
 #
 # Makefile for the MSM specific device drivers.
 #
+subdir-ccflags-y := -Os -O3
+ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions )
 obj-$(CONFIG_QPNP_REVID) += qpnp-revid.o
 obj-$(CONFIG_QPNP_COINCELL) += qpnp-coincell.o
 obj-$(CONFIG_MSM_MHI) += mhi/
@@ -21,3 +23,4 @@ obj-$(CONFIG_MSM_EXT_DISPLAY) += msm_ext_display.o
 #TODO: remove me b/62058353
 subdir-ccflags-y += \
 	-Wno-enum-conversion
+subdir-ccflags-y += -Os -O3

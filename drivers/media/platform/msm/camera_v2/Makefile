@@ -1,3 +1,5 @@
+subdir-ccflags-y := -Os
+ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions )
 ccflags-y += -Idrivers/media/platform/msm/camera_v2
 ccflags-y += -Idrivers/media/platform/msm/camera_v2/sensor
 ccflags-y += -Idrivers/media/platform/msm/camera_v2/codecs
