@@ -1152,7 +1152,7 @@ static int smb2_batt_set_prop(struct power_supply *psy,
 		break;
 	case POWER_SUPPLY_PROP_CURRENT_QNOVO:
 		vote(chg->pl_disable_votable, PL_QNOVO_VOTER,
-			val->intval != -EINVAL && val->intval < 2000000, 0);
+			val->intval != -EINVAL && val->intval < 400000, 0);
 		if (val->intval == -EINVAL) {
 			vote(chg->fcc_votable, BATT_PROFILE_VOTER,
 					true, chg->batt_profile_fcc_ua);
@@ -1737,7 +1737,7 @@ static int smb2_init_hw(struct smb2 *chip)
 		return rc;
 	}
 
-	/* disable h/w autonomous parallel charging control */
+	/* disable h/w autonomous parallel charging control 
 	rc = smblib_masked_write(chg, MISC_CFG_REG,
 				 STAT_PARALLEL_1400MA_EN_CFG_BIT, 0);
 	if (rc < 0) {
@@ -1746,6 +1746,7 @@ static int smb2_init_hw(struct smb2 *chip)
 			rc);
 		return rc;
 	}
+	*/
 
 	/* configure float charger options */
 	switch (chip->dt.float_option) {
