@@ -80,7 +80,7 @@ module_param(use_spi_crc, bool, 0664);
 /*
  * Internal function. Schedule delayed work in the MMC work queue.
  */
-static int mmc_schedule_delayed_work(struct delayed_work *work,
+static int mmc_queue_delayed_work(system_power_efficient_wq,struct delayed_work *work,
 				     unsigned long delay)
 {
 	return queue_delayed_work(workqueue, work, delay);
@@ -3336,7 +3336,7 @@ static void _mmc_detect_change(struct mmc_host *host, unsigned long delay,
 	if (cd_irq && mmc_bus_manual_resume(host))
 		host->ignore_bus_resume_flags = true;
 
-	mmc_schedule_delayed_work(&host->detect, delay);
+	mmc_queue_delayed_work(system_power_efficient_wq,&host->detect, delay);
 }
 
 /**
@@ -4281,7 +4281,7 @@ void mmc_rescan(struct work_struct *work)
 
  out:
 	if (host->caps & MMC_CAP_NEEDS_POLL)
-		mmc_schedule_delayed_work(&host->detect, HZ);
+		mmc_queue_delayed_work(system_power_efficient_wq,&host->detect, HZ);
 }
 
 void mmc_start_host(struct mmc_host *host)

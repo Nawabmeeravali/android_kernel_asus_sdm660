@@ -3646,7 +3646,7 @@ int kblockd_schedule_work(struct work_struct *work)
 }
 EXPORT_SYMBOL(kblockd_schedule_work);
 
-int kblockd_schedule_delayed_work(struct delayed_work *dwork,
+int kblockd_queue_delayed_work(system_power_efficient_wq,struct delayed_work *dwork,
 				  unsigned long delay)
 {
 	return queue_delayed_work(kblockd_workqueue, dwork, delay);

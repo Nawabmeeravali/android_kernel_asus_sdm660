@@ -1080,7 +1080,7 @@ static irqreturn_t sh_hdmi_hotplug(int irq, void *dev_id)
 			/* Display unplug, beware multiple interrupts */
 			if (hdmi->hp_state != HDMI_HOTPLUG_DISCONNECTED) {
 				hdmi->hp_state = HDMI_HOTPLUG_DISCONNECTED;
-				schedule_delayed_work(&hdmi->edid_work, 0);
+				queue_delayed_work(system_power_efficient_wq,&hdmi->edid_work, 0);
 			}
 			/* display_off will switch back to mode_a */
 		}
@@ -1093,7 +1093,7 @@ static irqreturn_t sh_hdmi_hotplug(int irq, void *dev_id)
 	} else if (status1 & 4) {
 		/* Disable EDID interrupt */
 		hdmi_write(hdmi, 0xC0, HDMI_INTERRUPT_MASK_1);
-		schedule_delayed_work(&hdmi->edid_work, msecs_to_jiffies(10));
+		queue_delayed_work(system_power_efficient_wq,&hdmi->edid_work, msecs_to_jiffies(10));
 	}
 
 	return IRQ_HANDLED;

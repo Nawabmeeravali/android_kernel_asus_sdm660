@@ -67,7 +67,7 @@ void mdp3_check_dsi_ctrl_status(struct work_struct *work,
 	}
 
 	if (mdp3_session->in_splash_screen) {
-		schedule_delayed_work(&pdsi_status->check_status,
+		queue_delayed_work(system_power_efficient_wq,&pdsi_status->check_status,
 			msecs_to_jiffies(interval));
 		pr_debug("%s: cont splash is on\n", __func__);
 		return;
@@ -91,7 +91,7 @@ void mdp3_check_dsi_ctrl_status(struct work_struct *work,
 
 	if (mdss_fb_is_power_on_interactive(pdsi_status->mfd)) {
 		if (ret > 0) {
-			schedule_delayed_work(&pdsi_status->check_status,
+			queue_delayed_work(system_power_efficient_wq,&pdsi_status->check_status,
 						msecs_to_jiffies(interval));
 		} else {
 			char *envp[2] = {"PANEL_ALIVE=0", NULL};

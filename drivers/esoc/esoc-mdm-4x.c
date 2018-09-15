@@ -372,7 +372,7 @@ static void mdm_notify(enum esoc_notify notify, struct esoc_clink *esoc)
 	switch (notify) {
 	case ESOC_IMG_XFER_DONE:
 		if (gpio_get_value(MDM_GPIO(mdm, MDM2AP_STATUS)) ==  0)
-			schedule_delayed_work(&mdm->mdm2ap_status_check_work,
+			queue_delayed_work(system_power_efficient_wq,&mdm->mdm2ap_status_check_work,
 				msecs_to_jiffies(MDM2AP_STATUS_TIMEOUT_MS));
 		break;
 	case ESOC_BOOT_DONE:

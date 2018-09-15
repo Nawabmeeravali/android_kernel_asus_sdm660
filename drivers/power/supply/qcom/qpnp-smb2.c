@@ -2575,7 +2575,7 @@ void read_BR_countrycode_work(struct work_struct *work)
 	if (IS_ERR_OR_NULL(fp)) {
         printk("[BAT][CHG] OPEN (%s) failed !! \n", COUNTRY_CODE_PATH);
 		if(--cnt >=0)
-			schedule_delayed_work(&smbchg_dev->read_countrycode_work, msecs_to_jiffies(3000));
+			queue_delayed_work(system_power_efficient_wq,&smbchg_dev->read_countrycode_work, msecs_to_jiffies(3000));
 		return ;	/*No such file or directory*/
 	}
 	/* For purpose that can use read/write system call */
@@ -2589,14 +2589,14 @@ void read_BR_countrycode_work(struct work_struct *work)
 			filp_close(fp, NULL);
 			printk("[BAT][CHG] Readlen <0\n");
 			if(--cnt >=0)
-				schedule_delayed_work(&smbchg_dev->read_countrycode_work, msecs_to_jiffies(3000));
+				queue_delayed_work(system_power_efficient_wq,&smbchg_dev->read_countrycode_work, msecs_to_jiffies(3000));
 			return ;
 		}
 		buf[readlen]='\0';
 	} else {
 		printk("[BAT][CHG] Read (%s) error\n", COUNTRY_CODE_PATH);
 		if(--cnt >=0)
-			schedule_delayed_work(&smbchg_dev->read_countrycode_work, msecs_to_jiffies(3000));
+			queue_delayed_work(system_power_efficient_wq,&smbchg_dev->read_countrycode_work, msecs_to_jiffies(3000));
 		return;
 	}
 
@@ -2687,7 +2687,7 @@ static int smb2_probe(struct platform_device *pdev)
 	}
 /* Huaqin modify for ZQL1650-74 Countrycode Adapter by diganyun at 2018/03/26 start */
 	INIT_DELAYED_WORK(&chg->read_countrycode_work, read_BR_countrycode_work);
-	schedule_delayed_work(&chg->read_countrycode_work, msecs_to_jiffies(8000));
+	queue_delayed_work(system_power_efficient_wq,&chg->read_countrycode_work, msecs_to_jiffies(8000));
 /* Huaqin modify for ZQL1650-74 Countrycode Adapter by diganyun at 2018/03/26 end */
 
 	rc = smb2_chg_config_init(chip);

@@ -1,4 +1,4 @@
-/* bnx2x_cmn.c: QLogic Everest network driver.
+s/* bnx2x_cmn.c: QLogic Everest network driver.
  *
  * Copyright (c) 2007-2013 Broadcom Corporation
  * Copyright (c) 2014 QLogic Corporation
@@ -5163,6 +5163,6 @@ void bnx2x_schedule_sp_rtnl(struct bnx2x *bp, enum sp_rtnl_flag flag,
 	smp_mb__after_atomic();
 	DP((BNX2X_MSG_SP | verbose), "Scheduling sp_rtnl task [Flag: %d]\n",
 	   flag);
-	schedule_delayed_work(&bp->sp_rtnl_task, 0);
+	queue_delayed_work(system_power_efficient_wq,&bp->sp_rtnl_task, 0);
 }
 EXPORT_SYMBOL(bnx2x_schedule_sp_rtnl);

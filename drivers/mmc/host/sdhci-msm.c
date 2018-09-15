@@ -3629,7 +3629,7 @@ void sdhci_msm_pm_qos_irq_unvote(struct sdhci_host *host, bool async)
 		return;
 
 	if (async) {
-		schedule_delayed_work(&msm_host->pm_qos_irq.unvote_work,
+		queue_delayed_work(system_power_efficient_wq,&msm_host->pm_qos_irq.unvote_work,
 				      msecs_to_jiffies(QOS_REMOVE_DELAY_MS));
 		return;
 	}
@@ -3905,7 +3905,7 @@ bool sdhci_msm_pm_qos_cpu_unvote(struct sdhci_host *host, int cpu, bool async)
 		return false;
 
 	if (async) {
-		schedule_delayed_work(&msm_host->pm_qos[group].unvote_work,
+		queue_delayed_work(system_power_efficient_wq,&msm_host->pm_qos[group].unvote_work,
 				      msecs_to_jiffies(QOS_REMOVE_DELAY_MS));
 		return true;
 	}
