@@ -17,7 +17,6 @@ enum FP_MODE{
 	GF_DEBUG_MODE = 0x56
 };
 
-#define SUPPORT_NAV_EVENT
 
 #if defined(SUPPORT_NAV_EVENT)
 /* Huaqin add define for fingerprint nav-keycode by leiyu at 2018/04/12 start */
@@ -137,6 +136,7 @@ struct gf_dev {
 	struct fasync_struct *async;
 #endif
 	struct notifier_block notifier;
+	struct work_struct fb_work;
 	char device_available;
 	char fb_black;
 };
