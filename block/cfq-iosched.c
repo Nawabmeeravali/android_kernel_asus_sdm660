@@ -705,7 +705,7 @@ static inline void cfqg_stats_update_completion(struct cfq_group *cfqg,
 	unsigned long long now = sched_clock();
 
 	if (time_after64(now, io_start_time))
-		blkg_rwstat_add(&stats->service_time, rw, now - io_start_time);
+		blkg_rwstat_add(&stats->service_time, rw, now - io_start_time_ns);
 	if (time_after64(io_start_time, start_time))
 		blkg_rwstat_add(&stats->wait_time, rw,
 				io_start_time - start_time);
