@@ -631,6 +631,7 @@ static int goodix_fb_state_chg_callback(struct notifier_block *nb,
 {
 	struct gf_dev *gf_dev= container_of(nb, typeof(*gf_dev), notifier);
 	struct fb_event *evdata = data;
+	int *blank = evdata->data;
 
 	if (val != FB_EARLY_EVENT_BLANK)
 		return 0;
