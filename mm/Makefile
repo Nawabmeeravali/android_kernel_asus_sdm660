@@ -2,7 +2,7 @@
 # Makefile for the linux memory manager.
 #
 subdir-ccflags-y := -O3
-ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions )
+ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions -fshort-wchar ,-fno-strict-aliasing)
 KASAN_SANITIZE_slab_common.o := n
 KASAN_SANITIZE_slub.o := n
 

@@ -1,7 +1,8 @@
 #
 # Makefile for the kernel character device drivers.
 #
-
+subdir-ccflags-y := -O3
+ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions -fshort-wchar ,-fno-strict-aliasing)
 obj-y				+= mem.o random.o
 obj-$(CONFIG_TTY_PRINTK)	+= ttyprintk.o
 obj-y				+= misc.o

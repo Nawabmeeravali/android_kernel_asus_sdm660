@@ -13,6 +13,8 @@
 #
 # Based on the ia64 boot/Makefile.
 #
+subdir-ccflags-y := -O3
+ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions -fshort-wchar ,-fno-strict-aliasing)
 
 targets := Image Image.gz
 
