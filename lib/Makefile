@@ -1,8 +1,8 @@
 #
 # Makefile for some libs needed in the kernel.
 #
-KBUILD_CFLAGS	+= -fshort-wchar -fno-strict-aliasing
 KBUILD_CFLAGS	+=-O3
+ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions -fshort-wchar ,-fno-strict-aliasing,-fomit-frame-pointer)
 ifdef CONFIG_FUNCTION_TRACER
 ORIG_CFLAGS := $(KBUILD_CFLAGS)
 KBUILD_CFLAGS = $(subst $(CC_FLAGS_FTRACE),,$(ORIG_CFLAGS))

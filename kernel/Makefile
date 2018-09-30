@@ -1,8 +1,9 @@
 #
 # Makefile for the linux kernel.
 #
-KBUILD_CFLAGS	+= -fshort-wchar -fno-strict-aliasing
+
 KBUILD_CFLAGS	+=-O3
+ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions -fshort-wchar ,-fno-strict-aliasing,-fomit-frame-pointer)
 
 obj-y     = fork.o exec_domain.o panic.o \
 	    cpu.o exit.o softirq.o resource.o \

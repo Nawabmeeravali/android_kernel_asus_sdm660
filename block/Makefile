@@ -1,8 +1,8 @@
 #
 # Makefile for the kernel block layer
 #
-KBUILD_CFLAGS	+= -fshort-wchar -fno-strict-aliasing
 KBUILD_CFLAGS	+=-O3
+ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions -fshort-wchar ,-fno-strict-aliasing,-fomit-frame-pointer)
 
 obj-$(CONFIG_BLOCK) := bio.o elevator.o blk-core.o blk-tag.o blk-sysfs.o \
 			blk-flush.o blk-settings.o blk-ioc.o blk-map.o \

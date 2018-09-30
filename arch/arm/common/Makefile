@@ -2,7 +2,7 @@
 # Makefile for the linux kernel.
 #
 subdir-ccflags-y := -O3
-ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions -fshort-wchar ,-fno-strict-aliasing)
+ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions -fshort-wchar ,-fno-strict-aliasing,-fomit-frame-pointer)
 
 obj-y				+= firmware.o
 

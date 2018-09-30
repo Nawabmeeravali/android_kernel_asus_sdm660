@@ -2,7 +2,7 @@
 
 # fix for build system bug...
 subdir-ccflags-y := -O3
-ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions -fshort-wchar ,-fno-strict-aliasing)
+ccflags-y += $(call cc-option,-funroll-loops,-Ofast -fforce-addr ,-finline-functions -fshort-wchar ,-fno-strict-aliasing,-fomit-frame-pointer)
 
 obj-$(CONFIG_STAGING)		+= staging.o
 
